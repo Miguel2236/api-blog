@@ -70,4 +70,18 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    protected function edit($id)
+    {
+        /**
+         * abrir la ventana de edición de usuarios
+         */
+    }
+
+    protected function update()
+    {
+        /**
+         * funcion param que cada usuario edite su nombre y contraseña
+         */
+    }
 }
