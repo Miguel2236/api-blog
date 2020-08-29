@@ -26,6 +26,11 @@
                 {{-- <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a> --}}
+                @auth
+                    <a href="#" class="navbar-brand">Productos</a>
+                    <a href="#" class="navbar-brand">Categorias</a>
+                @endauth
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -55,7 +60,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('edit.user', Auth::user()->id) }}" class="dropdown-item">
+                                    <a href="{{ route('edit.user', ['id' => Auth::user()->id]) }}" class="dropdown-item">
                                         Opciones
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

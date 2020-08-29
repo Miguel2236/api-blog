@@ -77,8 +77,10 @@ class RegisterController extends Controller
          * abrir la ventana de edición de usuarios
          */
 
-         $user = User::find($id);
-         return view('auth.edit',compact('user'));
+        dd($id);
+
+        //  $user = User::find($id);
+        //  return view('auth.edit',compact('user'));
     }
 
     public function update()
