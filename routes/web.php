@@ -20,4 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('users/edit/{id}',['as' => 'edit.user', 'uses' => 'Auth\RegisterController@edit']);
+
+Route::put('users/update/{id}',['as' => 'update.user', 'uses' => 'Auth\RegisterController@update']);
+
 Route::get('/home', 'HomeController@index')->name('home');

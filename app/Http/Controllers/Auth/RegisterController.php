@@ -71,14 +71,17 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function edit($id)
+    public function edit($id)
     {
         /**
          * abrir la ventana de edición de usuarios
          */
+
+         $user = User::find($id);
+         return view('auth.edit',compact('user'));
     }
 
-    protected function update()
+    public function update()
     {
         /**
          * funcion param que cada usuario edite su nombre y contraseña
