@@ -27,8 +27,8 @@
                     {{ config('app.name', 'Laravel') }}
                 </a> --}}
                 @auth
-                    <a href="#" class="navbar-brand">Productos</a>
-                    <a href="#" class="navbar-brand">Categorias</a>
+                    <a href="#" class="navbar-brand">Supervisores</a>
+                    <a href="#" class="navbar-brand">Departamentos</a>
                 @endauth
                 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -46,11 +46,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">Registro</a>
                                 </li>
                             @endif
                         @else
