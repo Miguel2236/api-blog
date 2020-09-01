@@ -29,7 +29,7 @@
                 @auth
                     <a class="navbar-brand" href="{{ route('home') }}">Inicio</a>
                     <a href="{{ route('dep.list') }}" class="navbar-brand">Departamentos</a>
-                    <a href="#" class="navbar-brand">Supervisores</a>
+                    <a href="{{ route('sup.list') }}" class="navbar-brand">Supervisores</a>
                 @endauth
                 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
