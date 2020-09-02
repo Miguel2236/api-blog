@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use PDF;
 use App\Departament;
 use App\Supervisor;
 use Carbon\Carbon;
@@ -21,9 +22,49 @@ class SupervisorController extends Controller
         $supervisores = DB::table('supervisors')
                         ->join('departaments','supervisors.departament_id','=','departaments.id')
                         ->select('supervisors.id','supervisors.clave','supervisors.nombre','supervisors.salario','departaments.nombre as departamento')
+                        ->where('supervisors.bActivo', 1)
                         ->get();
 
         return view('sup.list', compact('supervisores'));
+    }
+
+    public function report()
+    {
+        // Generar un reporte en PDF
+        $supervisores = DB::table('supervisors')
+                        ->join('departaments','supervisors.departament_id','=','departaments.id')
+                        ->select('supervisors.id','supervisors.clave','supervisors.nombre','supervisors.salario','departaments.nombre as departamento')
+                        ->where('supervisors.bActivo', 1)
+                        ->get();
+
+        $report = '';
+        $report .='<h1>Reporte de Supervisores</h1>';
+        $report .='<br>';
+        $report .='<table border="2">';
+        $report .='<thead>';
+        $report .='<tr>';
+        $report .='<th>Clave</th>';
+        $report .='<th>Nombre</th>';
+        $report .='<th>Salario</th>';
+        $report .='<th>Departamento</th>';
+        $report .='</tr>';
+        $report .='</thead>';
+        $report .='<tbody>';
+        foreach (json_decode($supervisores) as $sup)
+        {
+            $report .='<tr>';
+            $report .='<td>'.$sup->clave.'</td>';
+            $report .='<td>'.$sup->nombre.'</td>';
+            $report .='<td>'.$sup->salario.'</td>';
+            $report .='<td>'.$sup->departamento.'</td>';
+            $report .='</tr>';
+        }
+        $report .='</tbody>';
+        $report .='</table>';
+        
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadHTML($report);
+        return $pdf->stream();
     }
 
     /**
@@ -99,7 +140,7 @@ class SupervisorController extends Controller
     public function update(Request $request, $id)
     {
         // actualizar un supervisor
-        $Sup = Supervisor::find($id);
+        $Sup = Supervisor::findOrFail($id);
 
         $Sup->clave = $request->input('clave');
 
@@ -110,6 +151,8 @@ class SupervisorController extends Controller
         $Sup->departament_id = $request->input('departament_id');
 
         $Sup->save();
+
+        return redirect()->route('sup.list');
     }
 
     /**
@@ -129,5 +172,8 @@ class SupervisorController extends Controller
     public function destroy($id)
     {
         // eliminar un supervisor
+        Supervisor::findOrFail($id)->delete();
+
+        return redirect()->route('sup.list');
     }
 }

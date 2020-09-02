@@ -26,7 +26,7 @@ Route::get('departamento/editar/{id}', ['as' => 'dep.edit', 'uses' => 'Departame
 
 Route::put('departamento/update/{id}', ['as' => 'dep.update', 'uses' => 'DepartamentController@update']);
 
-Route::put('departamento/erase/{id}', ['as' => 'dep.erase', 'uses' => 'DepartamentController@erase']);
+Route::get('departamento/erase/{id}', ['as' => 'dep.erase', 'uses' => 'DepartamentController@erase']);
 
 // Supervisores
 Route::get('supervisores/', ['as' => 'sup.list', 'uses' => 'SupervisorController@index']);
@@ -37,4 +37,10 @@ Route::post('supervisores/store', ['as' => 'sup.store', 'uses' => 'SupervisorCon
 
 Route::get('supervisores/edit/{id}', ['as' => 'sup.edit', 'uses' => 'SupervisorController@edit']);
 
+Route::get('supervisores/show/{id}', ['as' => 'sup.show', 'uses' => 'SupervisorController@show']);
+
 Route::put('supervisores/update/{id}', ['as' => 'sup.update', 'uses' =>'SupervisorController@update']);
+
+Route::get('supervisores/erase/{id}', ['as' => 'sup.erase', 'uses' => 'SupervisorController@erase']);
+
+Route::get('supervisores/report', ['as' => 'sup.report', 'uses' => 'SupervisorController@report']);

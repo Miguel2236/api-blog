@@ -5,16 +5,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Nuevo Supervisor</div>
+                <div class="card-header">Editar Supervisor</div>
                 <div class="card-body">
-                    <form action="{{ route('sup.update',$data['supervisor'][0]->departament_id ) }}" method="POST" id="frmSup">
+                    <form action="{{ route('sup.update',$data['supervisor'][0]->id ) }}" method="POST" id="frmSup">
                         @csrf
                         @method('PUT')
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="clave">Clave</label>
-                                    <input type="text" class="form-control" name="clave" value="{{ $data['supervisor'][0]->clave }}" autocomplete="off">
+                                    <input type="text" class="form-control" name="clave" value="{{ $data['supervisor'][0]->clave }}" readonly="true">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="nombre">Nombre</label>

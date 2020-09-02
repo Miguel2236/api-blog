@@ -34,12 +34,7 @@
                                         <div class="btn-group mr-2" role="group">
                                             <div class="col-md-12">
                                                 <a href="{{ route('dep.edit', $dep->id) }}" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                                <form action="{{ route('dep.erase',$dep->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="bActivo" value="0">
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
-                                                </form>
+                                                <a href="{{ route('dep.erase', $dep->id) }}" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </div>
                                     </td>

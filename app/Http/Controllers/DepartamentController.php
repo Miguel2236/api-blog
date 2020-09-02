@@ -91,7 +91,14 @@ class DepartamentController extends Controller
     public function update(Request $request, $id)
     {
         // actualizar registro
-        $cat = Departament::findOrFail($id)->update($request->all());
+        // $cat = Departament::findOrFail($id)->update($request->all());
+        $Cat = Departament::findOrFail($id);
+
+        $Cat->nombre = $request->input('nombre');
+
+        $Cat->observacion = $request->input('observacion');
+
+        $Cat->save();
 
         return redirect()->route('dep.list');
     }
@@ -103,10 +110,15 @@ class DepartamentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function erase(Request $request, $id)
+    public function erase($id)
     {
         // borrado lógico de un registro
-        Departament::findOrFail($id)->update($request->all());
+        // Departament::findOrFail($id)->update($request->all());
+        $Cat = Departament::findOrFail($id);
+
+        $Cat->bActivo = 0;
+
+        $Cat->save();
 
         return redirect()->route('dep.list');
     }
@@ -114,5 +126,8 @@ class DepartamentController extends Controller
     public function destroy($id)
     {
         // eliminar registro
+        Departament::findOrFail($id)->delete();
+
+        return redirect()->route('dep.list');
     }
 }
