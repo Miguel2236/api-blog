@@ -89,19 +89,30 @@ class SupervisorController extends Controller
     public function store(Request $request)
     {
         // crear un supervisor
-        $Sup = new Supervisor();
+        $clave = $request->input('clave');
 
-        $Sup->clave = $request->input('clave');
+        $row = Supervisor::where('clave', $clave)->get();
 
-        $Sup->nombre = $request->input('nombre');
+        if (count($row) == 0)
+        {
+            $Sup = new Supervisor();
 
-        $Sup->salario = $request->input('salario');
+            $Sup->clave = $request->input('clave');
 
-        $Sup->departament_id = $request->input('departament_id');
-        
-        $Sup->save();
+            $Sup->nombre = $request->input('nombre');
 
-        return redirect()->route('sup.list');
+            $Sup->salario = $request->input('salario');
+
+            $Sup->departament_id = $request->input('departament_id');
+            
+            $Sup->save();
+
+            return redirect()->route('sup.list');
+        }
+        else
+        {
+            return view('sup.error');
+        }
     }
 
     /**
@@ -115,6 +126,25 @@ class SupervisorController extends Controller
         // mostrar un supervisor
     }
 
+    public function search(Request $request)
+    {
+        // búsqueda de un supervisor usando su clave
+        $supervisor = DB::table('supervisors')
+                        ->join('departaments','supervisors.departament_id','=','departaments.id')
+                        ->select('supervisors.id','supervisors.clave','supervisors.nombre','supervisors.salario','departaments.nombre as departamento')
+                        ->where('clave', $request->input('clave'))
+                        ->get();
+
+        if (count($supervisor) != 0)
+        {
+            return view('sup.info', compact('supervisor'));
+        }
+        else
+        {
+            return view('sup.error');
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -124,7 +154,7 @@ class SupervisorController extends Controller
     public function edit($id)
     {
         // formulario de edicion
-        $supervisor = Supervisor::findOrFail($id)->get();
+        $supervisor = Supervisor::findOrFail($id);
         $departamentos = Departament::where('bActivo', 1)->get();
 
         return view('sup.edit')->with('data', compact('supervisor', 'departamentos'));
@@ -164,7 +194,11 @@ class SupervisorController extends Controller
     public function erase(Request $request, $id)
     {
         // borrado lógico de un registro
-        Supervisor::findOrFail($id)->update($request->all());
+        $Sup = Supervisor::findOrFail($id);
+
+        $Sup->bActivo = 0;
+
+        $Sup->save();
 
         return redirect()->route('sup.list');
     }

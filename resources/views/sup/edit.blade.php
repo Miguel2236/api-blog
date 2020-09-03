@@ -7,31 +7,31 @@
             <div class="card">
                 <div class="card-header">Editar Supervisor</div>
                 <div class="card-body">
-                    <form action="{{ route('sup.update',$data['supervisor'][0]->id ) }}" method="POST" id="frmSup">
+                    <form action="{{ route('sup.update',$data['supervisor']->id ) }}" method="POST" id="frmSup">
                         @csrf
                         @method('PUT')
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="clave">Clave</label>
-                                    <input type="text" class="form-control" name="clave" value="{{ $data['supervisor'][0]->clave }}" readonly="true">
+                                    <input type="text" class="form-control" name="clave" value="{{ $data['supervisor']->clave }}" readonly="true">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" value="{{ $data['supervisor'][0]->nombre }}" autocomplete="off">
+                                    <input type="text" class="form-control" name="nombre" value="{{ $data['supervisor']->nombre }}" autocomplete="off">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="salario">Salario</label>
-                                    <input type="number" class="form-control" name="salario" value="{{ $data['supervisor'][0]->salario }}" autocomplete="off">
+                                    <input type="number" class="form-control" name="salario" value="{{ $data['supervisor']->salario }}" autocomplete="off">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="departament_id">Departamento</label>
                                     <select class="form-control" name="departament_id" id="dep">
                                         <option value="">- Seleccionar -</option>
                                         @foreach ($data['departamentos'] as $dep)
-                                            <option value="{{ $dep->id }}" {{ $dep->id == $data['supervisor'][0]->departament_id ? 'selected' : '' }}>{{ $dep->nombre }}</option>
+                                            <option value="{{ $dep->id }}" {{ $dep->id == $data['supervisor']->departament_id ? 'selected' : '' }}>{{ $dep->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -44,3 +44,5 @@ Route::put('supervisores/update/{id}', ['as' => 'sup.update', 'uses' =>'Supervis
 Route::get('supervisores/erase/{id}', ['as' => 'sup.erase', 'uses' => 'SupervisorController@erase']);
 
 Route::get('supervisores/report', ['as' => 'sup.report', 'uses' => 'SupervisorController@report']);
+
+Route::post('supervisores/search', ['as' => 'sup.search', 'uses' => 'SupervisorController@search']);

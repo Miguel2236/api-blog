@@ -113,7 +113,6 @@ class DepartamentController extends Controller
     public function erase($id)
     {
         // borrado lógico de un registro
-        // Departament::findOrFail($id)->update($request->all());
         $Cat = Departament::findOrFail($id);
 
         $Cat->bActivo = 0;
